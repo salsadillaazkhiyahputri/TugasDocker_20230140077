@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Mahasiswa</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        h2 { color: #333; margin: 0; }
+        .btn-add { background: #34a853; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 500; transition: 0.3s; }
+        .btn-add:hover { background: #2d8e47; box-shadow: 0 4px 12px rgba(52,168,83,0.3); }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 8px; overflow: hidden; }
+        th { background: #1a73e8; color: white; padding: 15px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid #eee; color: #555; }
+        tr:nth-child(even) { background: #fcfcfc; }
+        tr:hover { background: #f1f8ff; }
+        .identity { margin-top: 30px; padding-top: 20px; border-top: 2px solid #f1f1f1; font-size: 0.9rem; color: #888; text-align: right; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-flex">
+        <h2>Daftar Mahasiswa</h2>
+        <a th:href="@{/form}" class="btn-add">+ Tambah Mahasiswa</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>NIM</th>
+            <th>Nama Lengkap</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.nim}" style="font-weight: bold; color: #1a73e8;"></td>
+            <td th:text="${u.nama}"></td>
+            <td>
+                        <span th:text="${u.jenisKelamin}"
+                              th:style="${u.jenisKelamin == 'Laki-laki' ? 'color: #1a73e8' : 'color: #e91e63'}">
+                        </span>
+            </td>
+        </tr>
+        <tr th:if="${users.empty}">
+            <td colspan="3" style="text-align: center; color: #999; padding: 40px;">Belum ada data mahasiswa.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
